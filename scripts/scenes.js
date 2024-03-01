@@ -19,6 +19,7 @@ function loadMap() {
         map.image = game.assets['assets/tilesets/Tileset.png']
         map.loadData(mapTiles.map(subArray => subArray.map(e => e - 1)))
         stage.addChild(map)
+
     }
 }
 

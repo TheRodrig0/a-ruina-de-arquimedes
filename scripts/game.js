@@ -12,27 +12,20 @@ let loadFiles = [
     'assets/character.png'
 
 ]
-function preloadFiles() {
-    if (!loadFiles) return
-
-    game.preload(loadFiles)
-
-}
-
-preloadFiles()
+game.preload(loadFiles)
 
 //
 let stage = new Group()
 
 //Criar Sprite
-function createNewSprite (width, height, url, x, y){
+function createNewSprite(width, height, url, x, y) {
     let sprite
-    
+
     sprite = new Sprite(width, height)
     sprite.image = game.assets[url]
     sprite.x = x
     sprite.y = y
-    game.rootScene.addChild(sprite)
+    stage.addChild(sprite)
 
     return sprite
 
@@ -43,10 +36,13 @@ game.onload = () => {
 
     //mapa
     createMap()
+    loadMap()
+
+    game.rootScene.addChild(stage)
 
     //player
     let player = createNewSprite(50, 80, 'assets/character.png', 50, 50)
-   
+
 
 
 }
