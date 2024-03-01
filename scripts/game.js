@@ -14,7 +14,7 @@ let loadFiles = [
 ]
 game.preload(loadFiles)
 
-//
+
 let stage = new Group()
 
 //Criar Sprite
@@ -33,17 +33,13 @@ function createNewSprite(width, height, url, x, y) {
 
 // quando a variavel game carrega ele executa o que deve acontecer nele
 game.onload = () => {
-
     //mapa
     createMap()
-    loadMap()
 
     game.rootScene.addChild(stage)
 
     //player
     let player = createNewSprite(50, 80, 'assets/character.png', 50, 50)
-
-
 
 }
 
