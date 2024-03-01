@@ -10,10 +10,9 @@ let loadFiles = [
     'assets/tilesets/Tileset.png',
     'assets/tilesets/map.json',
     'assets/character.png'
-
 ]
-game.preload(loadFiles)
 
+game.preload(loadFiles)
 
 let stage = new Group()
 
@@ -35,7 +34,6 @@ function createNewSprite(width, height, url, x, y) {
 game.onload = () => {
     //mapa
     createMap()
-
     game.rootScene.addChild(stage)
 
     //player
