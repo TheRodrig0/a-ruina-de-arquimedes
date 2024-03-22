@@ -1,2 +1,4 @@
 # A-ruina-de-Arquimedes
-Um jogo de fantasia (rpg) onde você aprende matemática, criado com tecnologias como: javaScript, enchant.js, css e etc
+Esse projeto é de um Rpg que envolve conceitos da matemática, que nesse jog serão expressos como magias e poderes diversos.
+
+Tecnologias usadas: enchant.js (biblioteca), javascript, css.

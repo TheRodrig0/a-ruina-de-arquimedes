@@ -1,29 +1,52 @@
-// Criar mapa
-let map
+class MapData {
+    constructor(core) {
+        if (core.constructor.name != 'Game') {
+            createErrorMensage(`Argumentos da classe MapData são inválidos`)
 
-function loadMap() {
-    const mapData = JSON.parse(game.assets['assets/tilesets/map.json'])
-    let mapLayers = mapData.layers
+        } else {
+            this.core = core
 
-    const mapHeight = mapData.height
-
-    for (let i = 0; i < mapLayers.length; i++) {
-        let mapTiles = []
-        let arrayData = mapLayers[i].data
-        
-        for (let j = 0; j < arrayData.length; j += mapHeight) {
-            mapTiles.push(arrayData.slice(j, j + mapHeight));
+            this.mapData = JSON.parse(core.assets['assets/tilesets/map.json'])
+            this.mapLayers = this.mapData.layers
+            this.mapHeight = this.mapData.height
+            this.mapTiles = []
         }
+    }
 
-        let map = new Map(mapData.tilesets[0].tilewidth, mapData.tilesets[0].tileheight)
-        map.image = game.assets['assets/tilesets/Tileset.png']
-        map.loadData(mapTiles.map(subArray => subArray.map(e => e - 1)))
-        stage.addChild(map)
+    convertArrayInMatrix() {
+        for (let i = 0; i < this.mapLayers.length; i++) {
+            let mapSubTiles = []
 
+            let currentLayerArray = this.mapLayers[i].data
+
+            for (let j = 0; j < currentLayerArray.length; j += this.mapHeight) {
+                mapSubTiles.push(currentLayerArray.slice(j, j + this.mapHeight))
+            }
+
+            this.mapTiles[i] = mapSubTiles
+        }
+    }
+
+    getMapTiles() {
+        this.convertArrayInMatrix()
+        return this.mapTiles
     }
 }
 
+class MapRenderer {
+    constructor(core, mapData) {
+        this.core = core
+        this.mapData = mapData
+    }
 
-function createMap() {
-    loadMap()
+    renderMap() {
+        const mapTiles = this.mapData.getMapTiles()
+
+        for (let o = 0; o < mapTiles.length; o++) {
+            const map = new Map(16, 16)
+            map.image = this.core.assets['assets/tilesets/mapTileset.png']
+            map.loadData(mapTiles[o].map(subArray => subArray.map(e => e - 1)))
+            this.core.addChild(map)
+        }
+    }
 }

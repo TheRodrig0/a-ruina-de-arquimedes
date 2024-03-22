@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 #enchant-stage {
@@ -9,3 +10,4 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
