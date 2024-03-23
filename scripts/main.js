@@ -87,7 +87,11 @@ function renderGame() {
         const mapData = new MapData(game)
         const renderMap = new MapRenderer(game, mapData).renderMap()
 
-        const player = new CreateEntity(game, 50, 60, 100, 100, 2, 'assets/player/character.png')
+        const player = new CreateEntity(game, 50, 60, 100, 100, 1, 'assets/player/character.png')
+
+        game.on('enterframe', () => {
+            movePLayer(game, player)
+        })
     }
 
     game.start()
@@ -95,3 +99,5 @@ function renderGame() {
 }
 
 renderGame()
+
+
