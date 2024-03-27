@@ -1,4 +1,4 @@
-function moveBackGround(core, camera, mapData) {
+function moveBackGround(core, camera, player, mapData) {
     const distance = 3
     const input = core.input
 
@@ -8,9 +8,11 @@ function moveBackGround(core, camera, mapData) {
     // Verifica as entradas do jogador e move a câmera
     if (input.left && !(camera.x >= 0)) {
         camera.x += distance
+        player.scaleX = -1
     }
     if (input.right && -camera.x + camera.width <= mapWidth) {
         camera.x -= distance
+        player.scaleX = 1
     }
     if (input.up && !(camera.y >= 0)) {
         camera.y += distance
