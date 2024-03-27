@@ -98,7 +98,7 @@ function renderGame() {
         player.y = (game.height - player.height) / 2
 
         game.on('enterframe', () => {
-            objectsMovement(game, camera, mapData)
+            moveBackGround(game, camera, mapData)
         })
     }
 

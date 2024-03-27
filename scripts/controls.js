@@ -1,4 +1,4 @@
-function objectsMovement(core, camera, mapData) {
+function moveBackGround(core, camera, mapData) {
     const distance = 10
     const input = core.input
 
