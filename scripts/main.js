@@ -6,13 +6,14 @@ function createErrorMensage(mensage) {
     throw new Error(mensage)
 }
 
+// Checagem de tipo do argumento apresentado
 function isNumber(...args) {
     return args.every(arg => typeof arg === 'number')
 }
 
-// Classe para criação da instancia game, onde todo o jogo acontecerá
+// Classe para criação da instancia game
 class Game extends enchant.Core {
-    constructor(width, height, fps) {
+    constructor(width, height, scale, fps) {
         super()
 
         if (!isNumber(width, height, fps)) {
@@ -20,6 +21,7 @@ class Game extends enchant.Core {
         } else {
             this.width = width
             this.height = height
+            this.scale = scale
             this.fps = fps
         }
 
@@ -42,7 +44,6 @@ class Game extends enchant.Core {
         } else {
             this.preload(files)
         }
-
     }
 }
 
@@ -69,35 +70,42 @@ class CreateEntity extends enchant.Sprite {
             this.core.addChild(this)
         }
     }
-
 }
 
 // Função para renderização do jogo
 function renderGame() {
-    const game = new Game(750, 400, 60)
+    const game = new Game(750, 400, 3, 60)
+
+    const camera = new Group()
+    camera.x = camera.y = 0
+    camera.width = game.width
+    camera.height = game.height
+
     const files = [
         'assets/player/character.png',
         'assets/tilesets/mapTileset.png',
         'assets/tilesets/map.json'
     ]
-
     game.fileLoader(files)
 
     game.onload = () => {
         const mapData = new MapData(game)
-        const renderMap = new MapRenderer(game, mapData).renderMap()
+        const renderMap = new MapRenderer(game, camera, mapData).renderMap()
+        game.addChild(camera)
 
-        const player = new CreateEntity(game, 50, 60, 100, 100, 1, 'assets/player/character.png')
+        const player = new CreateEntity(game, 50, 60, 0, 0, 1, 'assets/player/character.png')
+        player.x = (game.width - player.width) / 2
+        player.y = (game.height - player.height) / 2
 
         game.on('enterframe', () => {
-            movePLayer(game, player)
+            objectsMovement(game, camera, mapData)
         })
     }
+
+
 
     game.start()
 
 }
 
 renderGame()
-
-

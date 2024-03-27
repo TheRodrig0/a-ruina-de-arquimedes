@@ -34,7 +34,8 @@ class MapData {
 }
 
 class MapRenderer {
-    constructor(core, mapData) {
+    constructor(core, camera, mapData) {
+        this.camera = camera
         this.core = core
         this.mapData = mapData
     }
@@ -46,7 +47,7 @@ class MapRenderer {
             const map = new Map(16, 16)
             map.image = this.core.assets['assets/tilesets/mapTileset.png']
             map.loadData(mapTiles[o].map(subArray => subArray.map(e => e - 1)))
-            this.core.addChild(map)
+            this.camera.addChild(map)
         }
     }
 }
