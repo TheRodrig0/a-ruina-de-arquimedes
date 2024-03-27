@@ -16,8 +16,8 @@ class Game extends enchant.Core {
     constructor(width, height, scale, fps) {
         super()
 
-        if (!isNumber(width, height, fps)) {
-            createErrorMensage(`Argumentos da classe Game são inválidos, pois não são números`)
+        if (!isNumber(width, height, scale, fps)) {
+            createErrorMensage(`Argumentos da classe Game são inválidos, pois não são números ou não existem`)
         } else {
             this.width = width
             this.height = height
@@ -60,7 +60,7 @@ class CreateEntity extends enchant.Sprite {
 
             this.width = width
             this.height = height
-            this.scaleX = this.scaleY = scale
+            this.scale = scale
 
             this.x = x
             this.y = y
@@ -74,7 +74,7 @@ class CreateEntity extends enchant.Sprite {
 
 // Função para renderização do jogo
 function renderGame() {
-    const game = new Game(750, 400, 3, 60)
+    const game = new Game(480, 270, 3, 60)
 
     const camera = new Group()
     camera.x = camera.y = 0
