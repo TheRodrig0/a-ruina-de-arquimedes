@@ -1,5 +1,5 @@
 function moveBackGround(core, camera, mapData) {
-    const distance = 10
+    const distance = 3
     const input = core.input
 
     const mapHeight = mapData.mapData.height * mapData.mapData.tilewidth
