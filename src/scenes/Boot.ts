@@ -1,7 +1,7 @@
 import AbstractScene from "./AbstractScene"
 import Phaser from "phaser"
 import applyBlinkEffect from "../utils/text/apply-blink-effect"
-import getMainCameraCenter from "../utils/position/get-main-center"
+import getMainCameraCenter from "../utils/camera/position/get-main-center"
 
 export default class Boot extends AbstractScene {
     private continueText: Phaser.GameObjects.Text
