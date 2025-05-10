@@ -1,4 +1,4 @@
-import getMainCameraCenter from "../utils/position/get-main-center"
+import getMainCameraCenter from "../utils/camera/position/get-main-center"
 
 export default class LoadingBar {
     private loadingPercentText!: Phaser.GameObjects.Text
@@ -10,10 +10,22 @@ export default class LoadingBar {
         }
 
         const MAIN_CAMERA_CENTER: { x: number, y: number } = getMainCameraCenter(scene)
-        const CENTER_X: number = MAIN_CAMERA_CENTER.x
-        const CENTER_Y: number = MAIN_CAMERA_CENTER.y
 
-        const LOADING_BACKGROUND_POSITION: number = CENTER_Y * 1.05
+        const LOADING_BACKGROUND_POSITION: { x: number, y: number } = {
+            x: MAIN_CAMERA_CENTER.x,
+            y: MAIN_CAMERA_CENTER.y * 1.05
+        }
+
+        const LOADING_BAR_POSITION: { x: number, y: number } = {
+            x: MAIN_CAMERA_CENTER.x,
+            y: LOADING_BACKGROUND_POSITION.y
+        }
+
+        const LOADING_PERCENT_TEXT_POSITION: { x: number, y: number } = {
+            x: MAIN_CAMERA_CENTER.x,
+            y: MAIN_CAMERA_CENTER.y * 1.05
+        }
+
         const LOADING_BACKGROUND_DIMENSIONS: Record<string, number> = {
             width: 226,
             height: 16
@@ -30,24 +42,24 @@ export default class LoadingBar {
         }
 
         scene.add.rectangle(
-            CENTER_X,
-            LOADING_BACKGROUND_POSITION,
+            LOADING_BACKGROUND_POSITION.x,
+            LOADING_BACKGROUND_POSITION.y,
             LOADING_BACKGROUND_DIMENSIONS.width,
             LOADING_BACKGROUND_DIMENSIONS.height,
             0x333333
         )
 
         this.loadingBar = scene.add.rectangle(
-            CENTER_X,
-            LOADING_BACKGROUND_POSITION,
+            LOADING_BAR_POSITION.x,
+            LOADING_BAR_POSITION.y,
             LOADING_BAR_DIMENSIONS.width,
             LOADING_BAR_DIMENSIONS.height,
             0xFFFFFF
         )
 
         this.loadingPercentText = scene.add.text(
-            CENTER_X,
-            LOADING_BACKGROUND_POSITION,
+            LOADING_PERCENT_TEXT_POSITION.x,
+            LOADING_PERCENT_TEXT_POSITION.y,
             "0%",
             FONT_STYLE
         )
