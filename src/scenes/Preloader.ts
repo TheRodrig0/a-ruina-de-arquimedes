@@ -1,6 +1,7 @@
 import AbstractScene from "./AbstractScene"
 import LoadingBar from "../components/loading-bar"
-import getMainCameraCenter from "../utils/position/get-main-center"
+import getMainCameraCenter from "../utils/camera/position/get-main-center"
+import goToNextSceneWithFade from "../utils/scene/transition/go-to-next-scene-with-fade"
 
 export default class Preloader extends AbstractScene {
     private loadingBar!: LoadingBar
@@ -60,8 +61,6 @@ export default class Preloader extends AbstractScene {
     private completeLoading(): void {
         const DELAY_TIME: number = 2000
 
-        this.time.delayedCall(DELAY_TIME, (): Phaser.Scenes.ScenePlugin =>
-            this.scene.start("MainMenu")
-        )
+       goToNextSceneWithFade(this, "MainMenu", DELAY_TIME / 2, DELAY_TIME / 2)
     }
 }
