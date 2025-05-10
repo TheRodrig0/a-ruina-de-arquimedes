@@ -16,13 +16,14 @@ const phasermsg = () => {
 };
 
 export default defineConfig({
-    base: '/a-ruina-de-arquimedes/',
+    base: '/a-ruina-de-arquimedes/', // Certifique-se de que o nome do repositório está correto
     logLevel: 'warning',
     build: {
+        outDir: 'docs', // Define a pasta de saída como "docs"
         rollupOptions: {
             output: {
                 manualChunks: {
-                    phaser: ['phaser'],
+                    phaser: ['phaser'], // Divide o Phaser em um chunk separado
                 },
             },
         },
@@ -38,7 +39,7 @@ export default defineConfig({
         },
     },
     server: {
-        port: 8080,
+        port: 8080, // Porta do servidor de desenvolvimento
     },
     plugins: [phasermsg()],
 });
