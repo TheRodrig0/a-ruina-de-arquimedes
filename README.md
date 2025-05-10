@@ -8,7 +8,7 @@
 ## A Ruína de Arquimedes
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3771a0e6-a3db-4ff2-8572-87321c88b397" alt="manual de identidade">
+  <img src="https://github.com/user-attachments/assets/3a475f34-5aa7-4735-976c-07a120ae9121" alt="manual de identidade">
 </p>
 
 ### Sobre
@@ -62,7 +62,7 @@ Com cada enigma matemático resolvido, ele desvenda os segredos ocultos deste mu
 ## The Doom of Arquimedes
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/92bd737c-2731-4f2b-878e-279f42fd9d04" alt="indentity manual">
+  <img src="https://github.com/user-attachments/assets/215f9853-04d1-4339-be06-8a1445ae5fed" alt="indentity manual">
 </p>
 
 ### What is it about
