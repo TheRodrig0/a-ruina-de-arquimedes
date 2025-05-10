@@ -1,5 +1,5 @@
 import AbstractScene from "./AbstractScene"
-import getMainCameraCenter from "../utils/position/get-main-center"
+import getMainCameraCenter from "../utils/camera/position/get-main-center"
 
 export default class MainMenu extends AbstractScene {
     constructor() {
