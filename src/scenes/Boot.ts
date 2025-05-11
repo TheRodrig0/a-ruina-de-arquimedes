@@ -1,9 +1,9 @@
-import AbstractScene from "./AbstractScene"
-import Phaser from "phaser"
-import applyBlinkEffect from "../utils/text/apply-blink-effect"
-import getMainCameraCenter from "../utils/camera/position/get-main-center"
+import { AbstractScene } from "./AbstractScene"
+import { applyBlinkEffect } from "../utils/text/apply-blink-effect"
+import { getMainCameraCenter } from "../utils/camera/position/get-main-center"
+import { Position } from "../types/commom/position-interface"
 
-export default class Boot extends AbstractScene {
+export class Boot extends AbstractScene {
     private continueText: Phaser.GameObjects.Text
 
     constructor() {
@@ -17,7 +17,7 @@ export default class Boot extends AbstractScene {
     }
 
     create(): void {
-        const MAIN_CAMERA_CENTER: { x: number, y: number } = getMainCameraCenter(this)
+        const MAIN_CAMERA_CENTER: Position = getMainCameraCenter(this)
 
         this.continueText = this.add.text(
             MAIN_CAMERA_CENTER.x,

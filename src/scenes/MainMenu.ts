@@ -1,15 +1,16 @@
-import AbstractScene from "./AbstractScene"
-import getMainCameraCenter from "../utils/camera/position/get-main-center"
+import { AbstractScene } from "./AbstractScene"
+import { getMainCameraCenter } from "../utils/camera/position/get-main-center"
+import { Position } from "../types/commom/position-interface"
 
-export default class MainMenu extends AbstractScene {
+export class MainMenu extends AbstractScene {
     constructor() {
         super('MainMenu')
     }
 
     create(): void {
-        const MAIN_CAMERA_CENTER: { x: number, y: number } = getMainCameraCenter(this)
+        const MAIN_CAMERA_CENTER: Position = getMainCameraCenter(this)
 
-        const LOGO_POSITION: { x: number, y: number } = {
+        const LOGO_POSITION: Position = {
             x: MAIN_CAMERA_CENTER.x,
             y: MAIN_CAMERA_CENTER.y * 0.5
         }
@@ -22,7 +23,7 @@ export default class MainMenu extends AbstractScene {
         this.add.image(LOGO_POSITION.x, LOGO_POSITION.y, "logo")
             .setDisplaySize(LOGO_DIMENSIONS.width, LOGO_DIMENSIONS.height)
 
-        const IN_PROGRESS_TEXT_POSITION: { x: number, y: number } = {
+        const IN_PROGRESS_TEXT_POSITION: Position = {
             x: MAIN_CAMERA_CENTER.x,
             y: MAIN_CAMERA_CENTER.y * 1.3
         }

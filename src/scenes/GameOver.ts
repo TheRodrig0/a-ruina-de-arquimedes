@@ -1,6 +1,6 @@
-import AbstractScene from "./AbstractScene"
+import { AbstractScene } from "./AbstractScene"
 
-export default class GameOver extends AbstractScene {
+export class GameOver extends AbstractScene {
     constructor() {
         super('GameOver')
     }

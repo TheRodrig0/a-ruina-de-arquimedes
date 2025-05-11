@@ -1,9 +1,10 @@
-import AbstractScene from "./AbstractScene"
-import LoadingBar from "../components/loading-bar"
-import getMainCameraCenter from "../utils/camera/position/get-main-center"
-import goToNextSceneWithFade from "../utils/scene/transition/go-to-next-scene-with-fade"
+import { AbstractScene } from "./AbstractScene"
+import { LoadingBar } from "../components/loading-bar"
+import { getMainCameraCenter } from "../utils/camera/position/get-main-center"
+import { goToNextSceneWithFade } from "../utils/scene/transition/go-to-next-scene-with-fade"
+import { Position } from "../types/commom/position-interface"
 
-export default class Preloader extends AbstractScene {
+export class Preloader extends AbstractScene {
     private loadingBar!: LoadingBar
     private currentAssetInLoadingText!: Phaser.GameObjects.Text
 
@@ -15,8 +16,8 @@ export default class Preloader extends AbstractScene {
         this.loadingBar = new LoadingBar()
         this.loadingBar.create(this)
 
-        const MAIN_CAMERA_CENTER: { x: number, y: number } = getMainCameraCenter(this)
-        const CURRENT_LOADING_ASSET_TEXT_POSITION: { x: number, y: number } = {
+        const MAIN_CAMERA_CENTER: Position = getMainCameraCenter(this)
+        const CURRENT_LOADING_ASSET_TEXT_POSITION: Position = {
             x: MAIN_CAMERA_CENTER.x,
             y: MAIN_CAMERA_CENTER.y * 0.9
         }
@@ -28,7 +29,7 @@ export default class Preloader extends AbstractScene {
         )
             .setOrigin(0.5)
 
-        const CURRENT_ASSET_IN_LOADING_TEXT_POSITION: { x: number, y: number } = {
+        const CURRENT_ASSET_IN_LOADING_TEXT_POSITION: Position = {
             x: MAIN_CAMERA_CENTER.x,
             y: MAIN_CAMERA_CENTER.y * 1.18
         }
@@ -61,6 +62,11 @@ export default class Preloader extends AbstractScene {
     private completeLoading(): void {
         const DELAY_TIME: number = 2000
 
-       goToNextSceneWithFade(this, "MainMenu", DELAY_TIME / 2, DELAY_TIME / 2)
+        goToNextSceneWithFade({
+            scene: this,
+            nextSceneKey: "MainMenu",
+            cameraAnimationDuration1: DELAY_TIME / 2,
+            cameraAnimationDuration2: DELAY_TIME / 2
+        })
     }
 }
