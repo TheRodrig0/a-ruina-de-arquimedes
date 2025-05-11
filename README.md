@@ -24,6 +24,7 @@ Com cada enigma matemático resolvido, ele desvenda os segredos ocultos deste mu
 - **Phaser 3**: Um framework em JavaScript que tem o foco de facilitar a criação de jogos para web.
 - **Vite**: Um build tool moderno e rápido para desenvolvimento front-end.
 - **ESLint**: Uma ferramenta para identificar e corrigir problemas no código JavaScript/TypeScript, garantindo qualidade e consistência.
+- **Vitest**: Uma ferramenta de teste moderna e rápida para JavaScript e TypeScript, focada em simplicidade e desempenho.
 
 ### Como usar o projeto
 1. **Clone o repositório**:
@@ -56,6 +57,11 @@ Com cada enigma matemático resolvido, ele desvenda os segredos ocultos deste mu
    npm run build
    ```
 
+6. **Executar os testes**:
+   Para rodar os testes, execute:
+   ```bash
+   npm test
+   ```
 ---
 
 <a id="english"></a>
@@ -108,4 +114,10 @@ With each mathematical puzzle solved, he unveils the most occult secrets of this
    To create an optimized version of the project, run:
    ```bash
    npm run build
+   ```
+
+6. **Run tests**:
+   To execute the tests, run:
+   ```bash
+   npm test
    ```
