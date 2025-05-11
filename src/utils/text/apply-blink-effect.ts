@@ -9,7 +9,7 @@ interface BlinkEffectConfig {
     }
 }
 
-export default function applyBlinkEffect(config: BlinkEffectConfig): void {
+export function applyBlinkEffect(config: BlinkEffectConfig): void {
     const { scene, target, othersConfigs } = config
 
     scene.tweens.add({
