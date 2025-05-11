@@ -1,6 +1,8 @@
-import getMainCameraCenter from "../utils/camera/position/get-main-center"
+import { getMainCameraCenter } from "../utils/camera/position/get-main-center"
+import { Position } from "../types/commom/position-interface"
+import { Dimensions } from "../types/commom/dimensions-interface"
 
-export default class LoadingBar {
+export class LoadingBar {
     private loadingPercentText!: Phaser.GameObjects.Text
     private loadingBar!: Phaser.GameObjects.Rectangle
 
@@ -9,29 +11,29 @@ export default class LoadingBar {
             throw new Error("Invalid argument: scene isn't an instance of Phaser.Scene")
         }
 
-        const MAIN_CAMERA_CENTER: { x: number, y: number } = getMainCameraCenter(scene)
+        const MAIN_CAMERA_CENTER: Position = getMainCameraCenter(scene)
 
-        const LOADING_BACKGROUND_POSITION: { x: number, y: number } = {
+        const LOADING_BACKGROUND_POSITION: Position = {
             x: MAIN_CAMERA_CENTER.x,
             y: MAIN_CAMERA_CENTER.y * 1.05
         }
 
-        const LOADING_BAR_POSITION: { x: number, y: number } = {
+        const LOADING_BAR_POSITION: Position = {
             x: MAIN_CAMERA_CENTER.x,
             y: LOADING_BACKGROUND_POSITION.y
         }
 
-        const LOADING_PERCENT_TEXT_POSITION: { x: number, y: number } = {
+        const LOADING_PERCENT_TEXT_POSITION: Position = {
             x: MAIN_CAMERA_CENTER.x,
             y: MAIN_CAMERA_CENTER.y * 1.05
         }
 
-        const LOADING_BACKGROUND_DIMENSIONS: Record<string, number> = {
+        const LOADING_BACKGROUND_DIMENSIONS: Dimensions = {
             width: 226,
             height: 16
         }
 
-        const LOADING_BAR_DIMENSIONS: Record<string, number> = {
+        const LOADING_BAR_DIMENSIONS: Dimensions = {
             width: 0,
             height: 14
         }
