@@ -1,12 +1,11 @@
-export default function fadeIn(scene: Phaser.Scene, fadeInDuration: number = 500, onComplete: () => void): void {
-    if (!(scene instanceof Phaser.Scene)) {
-        throw new Error("Invalid argument: scene isn't an instance of Phaser.Scene")
-    }
+import { CameraFadeConfig } from "../../../types/animations/camera-fade-config-interface"
 
+export function fadeIn(config: CameraFadeConfig): void {
+    const { scene, duration, onComplete } = config
     scene.tweens.add({
         targets: scene.cameras.main,
         alpha: 1,
-        duration: fadeInDuration,
-        onComplete
+        duration,
+        onComplete,
     })
 }
