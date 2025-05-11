@@ -1,19 +1,30 @@
-import fadeOut from "../../camera/transitions/fade-out"
-import fadeIn from "../../camera/transitions/fade-in"
+import { fadeOut } from "../../camera/transitions/fade-out"
+import { fadeIn } from "../../camera/transitions/fade-in"
+import { SceneTransitionConfig } from "../../../types/transitions/scene-transition-config-interface.ts"
 
-export default function goToNextSceneWithFade(scene: Phaser.Scene, nextSceneKey: string | Phaser.Scene, fadeOutDuration: number = 500, fadeInDuration: number = 500): void {
+export function goToNextSceneWithFade(config: SceneTransitionConfig): void {
+    const { scene, nextSceneKey, cameraAnimationDuration1: fadeOutDuration = 500, cameraAnimationDuration2: fadeInDuration = 500 } = config
+
     if (!(scene instanceof Phaser.Scene)) {
         throw new Error("Invalid argument: scene isn't an instance of Phaser.Scene")
     }
 
-    fadeOut(scene, fadeOutDuration, fadeInDuration, (): void => {
-        scene.scene.start(nextSceneKey)
+    fadeOut({
+        scene: scene,
+        duration: fadeOutDuration,
+        onComplete: (): void => {
+            scene.scene.start(nextSceneKey)
 
-        // Wait for the next scene to initialize
-        scene.scene.get(nextSceneKey).events.once('create', (): void => {
-            const NEXT_SCENE = scene.scene.get(nextSceneKey)
-            NEXT_SCENE.cameras.main.alpha = 0
-            fadeIn(NEXT_SCENE, fadeInDuration, () => { })
-        })
+            const nextSceneInstance = scene.scene.get(nextSceneKey)
+            nextSceneInstance.events.once(Phaser.Scenes.Events.CREATE, (): void => {
+                nextSceneInstance.cameras.main.alpha = 0
+                fadeIn({
+                    scene: nextSceneInstance,
+                    duration: fadeInDuration,
+                    onComplete: (): void => { }
+                })
+            })
+        }
     })
 }
+
