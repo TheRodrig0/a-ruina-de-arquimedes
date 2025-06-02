@@ -1,13 +1,13 @@
 import { setupGlobalErrorHandler } from './utils/error/setup-global-error-handler'
-import { Boot } from './scenes/Boot'
-import { Game as MainGame } from './scenes/Game'
-import { GameOver } from './scenes/GameOver'
-import { MainMenu } from './scenes/MainMenu'
-import { Preloader } from './scenes/Preloader'
+import Phaser from "phaser"
+import { Boot } from './scenes/boot'
+import { Preloader } from './scenes/preloader'
+import { Intro } from './scenes/intro'
+import { MainMenu } from './scenes/main-menu'
+import { Game as MainGame } from './scenes/game'
+import { GameOver } from './scenes/game-over'
 
 setupGlobalErrorHandler()
-
-import Phaser from "phaser"
 
 const config: Phaser.Types.Core.GameConfig = {
     title: "A ruína de Arquimedes",
@@ -39,6 +39,7 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [
         Boot,
         Preloader,
+        Intro,  
         MainMenu,
         MainGame,
         GameOver
