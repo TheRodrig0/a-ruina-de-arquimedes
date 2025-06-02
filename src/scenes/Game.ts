@@ -6,6 +6,6 @@ export class Game extends AbstractScene {
     }
 
     create(): void {
-
+        // Thanks for checking out my game code!
     }
 }

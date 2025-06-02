@@ -60,13 +60,13 @@ export class Preloader extends AbstractScene {
     }
 
     private completeLoading(): void {
-        const delay: number = 2000
+        const delay: number = 1000
 
         goToNextSceneWithFade({
             scene: this,
             nextSceneKey: "Intro",
-            cameraAnimationDuration1: delay / 2,
-            cameraAnimationDuration2: delay / 2
+            cameraAnimationDuration1: delay,
+            cameraAnimationDuration2: delay
         })
     }
 }

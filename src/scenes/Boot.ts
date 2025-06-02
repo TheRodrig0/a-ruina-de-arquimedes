@@ -1,6 +1,6 @@
 import { AbstractScene } from "./abstract-scene"
 import { applyBlinkEffect } from "../utils/text/apply-blink-effect"
-import { Position } from "../types/commom/position-interface"
+import type { Position } from "../types/commom/position-interface"
 
 export class Boot extends AbstractScene {
     constructor() {
@@ -51,6 +51,5 @@ export class Boot extends AbstractScene {
     private removeEventsToGoToNextScene(): void {
         this.input.keyboard?.off('keydown')
         this.input.off('pointerdown')
-
     }
 }
