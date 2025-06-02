@@ -14,7 +14,7 @@
     },
     "homepage": "https://github.com/phaserjs/a-ruina-de-arquimedes#readme",
     "scripts": {
-        "dev": "vite --config vite/config.dev.mjs",
+        "dev": "vite --host --config vite/config.dev.mjs",
         "build": "vite build --config vite/config.prod.mjs",
         "test": "vitest",
         "deploy": "git fetch origin gh-pages && git checkout gh-pages && cp -r docs/* . && git add . && git commit -m 'Updating deploy' && git push origin gh-pages && git checkout main"
