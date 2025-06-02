@@ -48,7 +48,7 @@ export class Preloader extends AbstractScene {
         this.load.setPath("assets")
         this.load.image("logo", "logos/logo_en.png")
         this.load.image("logo-phaser", "logos/logo_phaser.png")
-        //this.load.image("background", "backgrounds/background_test.png")
+        this.load.image("background", "backgrounds/background_test.png")
 
         this.load.on("progress", this.loadingBar.updateProgress.bind(this.loadingBar))
         this.load.on('fileprogress', this.updateFilesInLoadingText.bind(this))
