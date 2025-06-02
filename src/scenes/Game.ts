@@ -1,4 +1,4 @@
-import { AbstractScene } from "./AbstractScene"
+import { AbstractScene } from "./abstract-scene"
 
 export class Game extends AbstractScene {
     constructor() {
