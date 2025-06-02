@@ -1,11 +1,8 @@
-import { AbstractScene } from "./AbstractScene"
+import { AbstractScene } from "./abstract-scene"
 import { applyBlinkEffect } from "../utils/text/apply-blink-effect"
-import { getMainCameraCenter } from "../utils/camera/position/get-main-center"
 import { Position } from "../types/commom/position-interface"
 
 export class Boot extends AbstractScene {
-    private continueText: Phaser.GameObjects.Text
-
     constructor() {
         super('Boot')
     }
@@ -17,11 +14,11 @@ export class Boot extends AbstractScene {
     }
 
     create(): void {
-        const MAIN_CAMERA_CENTER: Position = getMainCameraCenter(this)
+        const mainCameraCenter: Position = this.cameraCenter
 
-        this.continueText = this.add.text(
-            MAIN_CAMERA_CENTER.x,
-            MAIN_CAMERA_CENTER.y,
+        const continueText = this.add.text(
+            mainCameraCenter.x,
+            mainCameraCenter.y,
             'Press any key or click to start the game',
             {
                 //fontFamily: "",
@@ -32,7 +29,7 @@ export class Boot extends AbstractScene {
 
         applyBlinkEffect({
             scene: this,
-            target: this.continueText,
+            target: continueText,
             othersConfigs: {
                 duration: 1000
             }
