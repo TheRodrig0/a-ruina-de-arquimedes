@@ -1,5 +1,5 @@
 import { AbstractScene } from "./abstract-scene"
-import { applyBlinkEffect } from "../utils/text/apply-blink-effect"
+import { applyBlinkEffect } from "../utils/effects/text/apply-blink-effect"
 import type { Position } from "../types/commom/position-interface"
 
 export class Boot extends AbstractScene {

@@ -1,6 +1,6 @@
-import { fadeOut } from "../../camera/transitions/fade-out"
-import { fadeIn } from "../../camera/transitions/fade-in"
-import { SceneTransitionConfig } from "../../../types/transitions/scene-transition-config-interface.ts"
+import { fadeOut } from "../../effects/object/fade-out"
+import { fadeIn } from "../../effects/object/fade-in"
+import type { SceneTransitionConfig } from "../../../types/transitions/scene-transition-config-interface"
 
 export function goToNextSceneWithFade(config: SceneTransitionConfig): void {
     const { scene, nextSceneKey, cameraAnimationDuration1: fadeOutDuration = 500, cameraAnimationDuration2: fadeInDuration = 500 } = config
@@ -11,6 +11,7 @@ export function goToNextSceneWithFade(config: SceneTransitionConfig): void {
 
     fadeOut({
         scene: scene,
+            target: scene.cameras.main,
         duration: fadeOutDuration,
         onComplete: (): void => {
             scene.scene.start(nextSceneKey)
@@ -20,6 +21,7 @@ export function goToNextSceneWithFade(config: SceneTransitionConfig): void {
                 nextSceneInstance.cameras.main.alpha = 0
                 fadeIn({
                     scene: nextSceneInstance,
+                    target: nextSceneInstance.cameras.main,
                     duration: fadeInDuration,
                     onComplete: (): void => { }
                 })

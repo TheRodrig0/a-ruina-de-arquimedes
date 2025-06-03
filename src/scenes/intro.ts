@@ -1,7 +1,8 @@
 import type { Position } from "../types/commom/position-interface"
 import type { Dimensions } from "../types/commom/dimensions-interface"
 import { AbstractScene } from "./abstract-scene"
-import { goToNextSceneWithFade } from "../utils/scene/transition/go-to-next-scene-with-fade"
+import { goToNextSceneWithFade } from "../utils/transitions/scene/go-to-next-scene-with-fade"
+import { fadeInOut } from "../utils/effects/object/fade-in-out"
 
 export class Intro extends AbstractScene {
     private readonly DEFAULT_DELAY = 1500;
@@ -15,11 +16,11 @@ export class Intro extends AbstractScene {
         super('Intro')
     }
 
-    create() {
+    create(): void {
         const cameraDimensions: Dimensions = this.cameraDimensions
         this.add.image(cameraDimensions.width / 2, cameraDimensions.height / 2, "background")
             .setDisplaySize(cameraDimensions.width, cameraDimensions.height)
-        .setAlpha(0.07, 0, 0, 0.07)
+            .setAlpha(0.07, 0, 0, 0.07)
 
         const mainCameraCenter: Position = this.cameraCenter
         const defaultImagesYPosition: number = mainCameraCenter.y * 0.7
@@ -37,8 +38,13 @@ export class Intro extends AbstractScene {
             "Powered by Phaser"
         )
 
-        this.applyTweenToObject(elements, this.DEFAULT_DELAY, 0, () => {
-            this.showGameIntro(center, imageY)
+        fadeInOut({
+            scene: this,
+            target: elements,
+            duration: this.DEFAULT_DELAY,
+            onComplete: (): void => {
+                this.showGameIntro(center, imageY)
+            }
         })
     }
 
@@ -51,8 +57,13 @@ export class Intro extends AbstractScene {
             "A Ruína de Arquimedes"
         )
 
-        this.applyTweenToObject(elements, this.DEFAULT_DELAY, 0, () => {
-            this.transitionToMainMenu()
+        fadeInOut({
+            scene: this,
+            target: elements,
+            duration: this.DEFAULT_DELAY,
+            onComplete: (): void => {
+                this.transitionToMainMenu()
+            }
         })
     }
 
@@ -65,11 +76,13 @@ export class Intro extends AbstractScene {
     ): Phaser.GameObjects.GameObject[] {
         const logo = this.add.image(center.x, imageY, logoKey)
             .setScale(scale)
+            .setAlpha(0)
 
         const defaultTextYPosition: number = center.y * 1.4
 
         const text = this.add.text(center.x, defaultTextYPosition, message, this.TEXT_STYLE)
             .setOrigin(0.5)
+            .setAlpha(0)
 
         return [logo, text]
     }
@@ -83,19 +96,4 @@ export class Intro extends AbstractScene {
         })
     }
 
-    private applyTweenToObject(
-        target: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
-        duration: number,
-        repeat: number = 0,
-        onComplete?: Phaser.Types.Tweens.TweenOnCompleteCallback
-    ): void {
-        this.tweens.add({
-            targets: target,
-            alpha: { from: 0, to: 1 },
-            duration: duration,
-            yoyo: true,
-            repeat: repeat,
-            onComplete: onComplete
-        })
-    }
 }

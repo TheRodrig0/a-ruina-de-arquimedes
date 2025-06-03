@@ -1,6 +1,6 @@
 import { AbstractScene } from "./abstract-scene"
 import { LoadingBar } from "../components/loading-bar"
-import { goToNextSceneWithFade } from "../utils/scene/transition/go-to-next-scene-with-fade"
+import { goToNextSceneWithFade } from "../utils/transitions/scene/go-to-next-scene-with-fade"
 import type { Position } from "../types/commom/position-interface"
 
 export class Preloader extends AbstractScene {
