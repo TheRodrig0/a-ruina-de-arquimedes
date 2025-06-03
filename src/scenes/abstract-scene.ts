@@ -1,6 +1,6 @@
 import Phaser from "phaser"
 import type { Position } from "../types/commom/position-interface"
-import { Dimensions } from "../types/commom/dimensions-interface"
+import type { Dimensions } from "../types/commom/dimensions-interface"
 
 export abstract class AbstractScene extends Phaser.Scene {
     constructor(key: string) {
