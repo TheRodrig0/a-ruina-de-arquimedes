@@ -17,16 +17,19 @@ export class Intro extends AbstractScene {
     }
 
     create(): void {
+        this.createBackground()
+
+        const mainCameraCenter: Position = this.cameraCenter
+        const defaultImagesYPosition: number = mainCameraCenter.y * 0.7
+        this.showPhaserIntro(mainCameraCenter, defaultImagesYPosition)
+
+    }
+
+    private createBackground(): void {
         const cameraDimensions: Dimensions = this.cameraDimensions
         this.add.image(cameraDimensions.width / 2, cameraDimensions.height / 2, "background")
             .setDisplaySize(cameraDimensions.width, cameraDimensions.height)
             .setAlpha(0.07, 0, 0, 0.07)
-
-        const mainCameraCenter: Position = this.cameraCenter
-        const defaultImagesYPosition: number = mainCameraCenter.y * 0.7
-
-        this.showPhaserIntro(mainCameraCenter, defaultImagesYPosition)
-
     }
 
     private showPhaserIntro(center: Position, imageY: number): void {
