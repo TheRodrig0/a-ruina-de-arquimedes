@@ -14,6 +14,10 @@ export class Boot extends AbstractScene {
     }
 
     create(): void {
+        this.createContinueText()
+    }
+
+    private createContinueText(): void {
         const mainCameraCenter: Position = this.cameraCenter
 
         const continueText = this.add.text(
