@@ -12,6 +12,22 @@ export class Preloader extends AbstractScene {
     }
 
     init(): void {
+        this.createLoadingUI()
+    }
+
+    preload(): void {
+        this.load.setPath("assets")
+        this.load.image("logo", "logos/logo_en.png")
+        this.load.image("logo-phaser", "logos/logo_phaser.png")
+        this.load.image("background", "backgrounds/background_test.png")
+        this.load.image('button', 'buttons/button-test.png')
+
+        this.load.on("progress", this.loadingBar.updateProgress.bind(this.loadingBar))
+        this.load.on('fileprogress', this.updateFilesInLoadingText.bind(this))
+        this.load.on("complete", this.completeLoading.bind(this))
+    }
+
+    private createLoadingUI(): void {
         this.loadingBar = new LoadingBar(this)
 
         const mainCameraCenter: Position = this.cameraCenter
@@ -44,17 +60,6 @@ export class Preloader extends AbstractScene {
             .setOrigin(0.5)
     }
 
-    preload(): void {
-        this.load.setPath("assets")
-        this.load.image("logo", "logos/logo_en.png")
-        this.load.image("logo-phaser", "logos/logo_phaser.png")
-        this.load.image("background", "backgrounds/background_test.png")
-
-        this.load.on("progress", this.loadingBar.updateProgress.bind(this.loadingBar))
-        this.load.on('fileprogress', this.updateFilesInLoadingText.bind(this))
-        this.load.on("complete", this.completeLoading.bind(this))
-    }
-
     private updateFilesInLoadingText(file: {key: string}): void {
         this.currentAssetInLoadingText.setText(`Asset: ${file.key}`)
     }
@@ -65,8 +70,8 @@ export class Preloader extends AbstractScene {
         goToNextSceneWithFade({
             scene: this,
             nextSceneKey: "Intro",
-            cameraAnimationDuration1: delay,
-            cameraAnimationDuration2: delay
+            durationAnim1: delay,
+            durationAnim2: delay
         })
     }
 }
