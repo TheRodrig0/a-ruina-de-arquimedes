@@ -3,12 +3,12 @@ import { fadeIn } from "../../effects/object/fade-in"
 import type { SceneTransitionConfig } from "../../../types/transitions/scene-transition-config-interface"
 
 export function goToNextSceneWithFade(config: SceneTransitionConfig): void {
-    const { scene, nextSceneKey, cameraAnimationDuration1: fadeOutDuration = 500, cameraAnimationDuration2: fadeInDuration = 500 } = config
+    const { scene, nextSceneKey, durationAnim1: fadeOutDuration = 500, durationAnim2: fadeInDuration = 500 } = config
 
     if (!(scene instanceof Phaser.Scene)) {
         throw new Error("Invalid argument: scene isn't an instance of Phaser.Scene")
     }
-
+    
     fadeOut({
         scene: scene,
             target: scene.cameras.main,

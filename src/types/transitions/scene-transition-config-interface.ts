@@ -1,6 +1,6 @@
 export interface SceneTransitionConfig {
     scene: Phaser.Scene
     nextSceneKey: string
-    cameraAnimationDuration1?: number
-    cameraAnimationDuration2?: number
+    durationAnim1?: number
+    durationAnim2?: number
 }
