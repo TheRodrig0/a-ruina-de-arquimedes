@@ -6,6 +6,7 @@ import { Intro } from './scenes/intro'
 import { MainMenu } from './scenes/main-menu'
 import { Game as MainGame } from './scenes/game'
 import { GameOver } from './scenes/game-over'
+import { InProgressScene } from './scenes/in-progress-scene'
 
 setupGlobalErrorHandler()
 
@@ -39,10 +40,11 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [
         Boot,
         Preloader,
-        Intro,  
+        Intro,
         MainMenu,
         MainGame,
-        GameOver
+        GameOver,
+        InProgressScene
     ]
 }
 
