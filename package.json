@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "phaser": "3.88.2",
+        "phaser-ui-tools": "^2.0.0-beta",
         "terser": "5.39.0"
     }
 }
