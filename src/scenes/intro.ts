@@ -29,7 +29,7 @@ export class Intro extends AbstractScene {
         const cameraDimensions: Dimensions = this.cameraDimensions
         this.add.image(cameraDimensions.width / 2, cameraDimensions.height / 2, "background")
             .setDisplaySize(cameraDimensions.width, cameraDimensions.height)
-            .setAlpha(0.07, 0, 0, 0.07)
+            .setAlpha(0.13, 0, 0, 0.13)
     }
 
     private showPhaserIntro(center: Position, imageY: number): void {
@@ -94,8 +94,8 @@ export class Intro extends AbstractScene {
         goToNextSceneWithFade({
             scene: this,
             nextSceneKey: "MainMenu",
-            cameraAnimationDuration1: this.DEFAULT_DELAY,
-            cameraAnimationDuration2: this.DEFAULT_DELAY
+            durationAnim1: this.DEFAULT_DELAY,
+            durationAnim2: this.DEFAULT_DELAY
         })
     }
 
