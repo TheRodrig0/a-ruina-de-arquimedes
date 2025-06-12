@@ -1,6 +1,6 @@
+import type { Position } from "../types/commom/position-interface"
 import { AbstractScene } from "./abstract-scene"
 import { applyBlinkEffect } from "../utils/effects/text/apply-blink-effect"
-import type { Position } from "../types/commom/position-interface"
 
 export class Boot extends AbstractScene {
     constructor() {
@@ -14,16 +14,15 @@ export class Boot extends AbstractScene {
     }
 
     create(): void {
-        this.createContinueText()
+        const cameraCenter: Position = this.cameraCenter
+        this.createContinueText(cameraCenter)
     }
 
-    private createContinueText(): void {
-        const mainCameraCenter: Position = this.cameraCenter
-
+    private createContinueText(position: Position): void {
         const continueText = this.add.text(
-            mainCameraCenter.x,
-            mainCameraCenter.y,
-            'Press any key or click to start the game',
+            position.x,
+            position.y,
+            "Press any key or click to start the game",
             {
                 //fontFamily: "",
                 fontSize: 12
