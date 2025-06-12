@@ -1,11 +1,11 @@
 import { AbstractScene } from "./abstract-scene"
 
-export class Game extends AbstractScene {
-    constructor() {
-        super('Game')
+export class Game extends AbstractScene{
+    constructor(){
+        super('MainGame')
     }
 
     create(): void {
-        // Thanks for checking out my game code!
+
     }
 }
