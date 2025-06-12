@@ -1,55 +1,126 @@
-import { TextButton } from "phaser-ui-tools"
+export class Button extends Phaser.GameObjects.Container {
+    private static readonly DEFAULT_FONT_SIZE: number = 10
+    private static readonly DEFAULT_TEXT: string = "Click me"
+    private static readonly DEFAULT_ORIGIN: number = 0.5
 
-export class Button extends TextButton {
-    constructor({ scene, x = 0, y = 0, text = "", key = "", callback }:
-        { scene: Phaser.Scene, x?: number, y?: number, text?: string, key: string, callback?: () => void }) {
-        super(scene, x, y, key, callback)
+    private textElement: Phaser.GameObjects.Text
+    private backgroundElement: Phaser.GameObjects.Image | undefined
+    private isEnabled: boolean = true
 
-        this.setText(text, {
-            color: '#ffffff',
-            fontSize: '10px',
-            align: 'center'
-        })
-        
-        this.button.setInteractive({ useHandCursor: true })
+    constructor({ scene, x, y, text, background, onClick }: { scene: Phaser.Scene, x: number, y: number, text: string, background?: string, onClick?: () => any }) {
+        super(scene, x, y)
 
-        this.button.setOrigin(0.5, 0.5)
-
-        this.button.on('pointerover', () => this.onPointerOver())
-        this.button.on('pointerout', () => this.onPointerOut())
-    }
-
-    private onPointerOver(): void {
-        this.scene.tweens.add({
-            targets: [this.button, this.text],
-            scale: 1.04,
-            duration: 100,
-            ease: 'Power1'
-        })
-    }
-
-    private onPointerOut(): void {
-        this.scene.tweens.add({
-            targets: [this.button, this.text],
-            scale: 1,
-            duration: 100,
-            ease: 'Power1'
-        })
-    }
-
-    setText(text: string, style?: Phaser.Types.GameObjects.Text.TextStyle): this {
-        if (this.text) {
-            this.text.destroy()
+        if (background) {
+            this.setupBackground(background)
         }
 
-        this.text = this.scene.add.text(this.button.x, this.button.y, text, style)
-        this.text.setOrigin(0.5, 0.5)
+        this.setupText(text ?? Button.DEFAULT_TEXT)
+        this.setupEvents(onClick ?? (() => { }))
+        this.setupHitbox()
 
-        const bounds = this.button.getBounds()
-        this.text.setPosition(bounds.centerX, bounds.centerY)
+        this.scene.add.existing(this)
+    }
 
-        this.add(this.text)
+    private setupText(text: string) {
+        this.textElement = this.scene.add.text(0, 0, text, {
+            fontSize: Button.DEFAULT_FONT_SIZE + "px"
+        })
+            .setOrigin(Button.DEFAULT_ORIGIN)
 
-        return this
+        this.add(this.textElement)
+    }
+
+    private setupBackground(background: string) {
+        this.backgroundElement = this.scene.add.image(0, 0, background)
+            .setOrigin(Button.DEFAULT_ORIGIN)
+
+        this.add(this.backgroundElement)
+    }
+
+    private setupHitbox() {
+        const element = this.backgroundElement ?? this.textElement
+
+        this.setSize(element.width, element.height)
+        this.setInteractive({ useHandCursor: true })
+    }
+
+    private setupEvents(onClick: () => any) {
+        const elements = [this.backgroundElement, this.textElement].filter(Boolean) as Phaser.GameObjects.GameObject[]
+
+        this.onPointerOverEvent(elements)
+        this.onPointerOutEvent(elements)
+
+        if (!onClick) {
+            return
+        }
+
+        this.onClickEvent(onClick)
+    }
+
+    private onClickEvent(onClick: () => any) {
+        this.on("pointerdown", () => {
+            if (!this.isEnabled) {
+                return
+            }
+
+            onClick()
+        })
+    }
+
+    private onPointerOverEvent(elements: Phaser.GameObjects.GameObject[]) {
+        const duration: number = 100
+        const scale: number = 1.04
+        
+        this.on("pointerover", () => {
+            if (!this.isEnabled) {
+                return
+            }
+
+            this.scene.tweens.killTweensOf(elements)
+
+            this.scene.tweens.add({
+                targets: elements,
+                scale,
+                duration
+            })
+        })
+    }
+
+    private onPointerOutEvent(elements: Phaser.GameObjects.GameObject[]) {
+        const duration: number = 100
+        const scale: number = 1 
+
+        this.on("pointerout", () => {
+            if (!this.isEnabled) {
+                return
+            }
+
+            this.scene.tweens.killTweensOf(elements)
+
+            this.scene.tweens.add({
+                targets: elements,
+                scale,
+                duration
+            })
+        })
+    }
+
+    setEnabled(enabled: boolean) {
+        const alpha: number = enabled ? 1 : 0.5
+
+        this.isEnabled = enabled
+        this.setAlpha(alpha)
+        this.disableInteractive()
+
+        if (!enabled) {
+            return
+        }
+
+        this.setInteractive({ useHandCursor: true })
+    }
+
+    destroy(fromScene?: boolean): void {
+        this.removeAllListeners()
+        super.destroy(fromScene)
     }
 }
