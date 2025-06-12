@@ -2,65 +2,79 @@ import type { Position } from "../types/commom/position-interface"
 import type { Dimensions } from "../types/commom/dimensions-interface"
 
 export class LoadingBar extends Phaser.GameObjects.Container {
-    private readonly loadingPercentText: Phaser.GameObjects.Text
-    private readonly loadingBar: Phaser.GameObjects.Rectangle
+    private static readonly DEFAULT_PERCENT_TEXT: string = "0%"
+    private loadingPercentText: Phaser.GameObjects.Text
+    private loadingBar: Phaser.GameObjects.Rectangle
     private readonly MAX_WIDTH: number = 220
 
-    constructor(scene: Phaser.Scene) {
-        super(scene, 0, 0)
-        
-        const center: Position = {
-            x: scene.cameras.main.centerX,
-            y: scene.cameras.main.centerY
-        }
+    constructor({ scene, position, dimensions }: { scene: Phaser.Scene, position: Position, dimensions: Dimensions }) {
+        super(scene, position.x, position.y)
 
-        const position: Position = {
-            x: center.x,
-            y: center.y * 1.05
-        }
-
-        const backgroundDimensions: Dimensions = {
-            width: 226,
-            height: 16
-        }
-
+        const barHeight: number = dimensions.height * 0.8
         const barDimensions: Dimensions = {
             width: 0,
-            height: 14
+            height: barHeight
         }
 
-        const background: Phaser.GameObjects.Rectangle = scene.add.rectangle(
-            position.x,
-            position.y,
-            backgroundDimensions.width,
-            backgroundDimensions.height,
-            0x333333
-        )
+        this.setupBackground(dimensions)
+        this.setupBar(barDimensions)
+        this.setupLoadingPercentText()
 
-        this.loadingBar = scene.add.rectangle(
-            position.x,
-            position.y,
-            barDimensions.width,
-            barDimensions.height,
-            0xFFFFFF
-        )
-
-        this.loadingPercentText = scene.add.text(
-            position.x,
-            position.y,
-            "0%",
-            {
-                fontSize: "11px",
-                color: "#000000"
-            }
-        ).setOrigin(0.5)
-
-        this.add([background, this.loadingBar, this.loadingPercentText])
         scene.add.existing(this)
     }
 
-    public updateProgress(value: number): void {
-        if (value < 0 || value > 1) {
+    private setupBackground(dimensions: Dimensions) {
+        const color: number = 0x333333
+
+        const background = this.scene.add.rectangle(
+            0,
+            0,
+            dimensions.width,
+            dimensions.height,
+            color
+        )
+
+        this.add(background)
+    }
+
+    private setupBar(dimensions: Dimensions) {
+        const color: number = 0xFFFFFF
+
+        this.loadingBar = this.scene.add.rectangle(
+            0,
+            0,
+            dimensions.width,
+            dimensions.height,
+            color
+        )
+
+        this.add(this.loadingBar)
+    }
+
+    private setupLoadingPercentText() {
+        const text: string = LoadingBar.DEFAULT_PERCENT_TEXT
+        const fontSize: string = "11px"
+        const color: string = "#000000"
+        const origin: number = 0.5
+
+        this.loadingPercentText = this.scene.add.text(
+            0,
+            0,
+            text,
+            {
+                fontSize,
+                color
+            }
+        )
+            .setOrigin(origin)
+
+        this.add(this.loadingPercentText)
+    }
+
+    updateProgress(value: number): void {
+        const isValidValue: boolean = value >= 0 && value <= 1
+
+        if (!isValidValue) {
             throw new Error("Invalid argument")
         }
 
