@@ -2,6 +2,7 @@ import { setupGlobalErrorHandler } from './utils/error/setup-global-error-handle
 import Phaser from "phaser"
 import { Boot } from './scenes/boot'
 import { Preloader } from './scenes/preloader'
+import { PreloaderUI } from './scenes/ui/preloader-ui'
 import { Intro } from './scenes/intro'
 import { MainMenu } from './scenes/main-menu'
 import { Game as MainGame } from './scenes/game'
@@ -40,6 +41,7 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [
         Boot,
         Preloader,
+        PreloaderUI,
         Intro,
         MainMenu,
         MainGame,
