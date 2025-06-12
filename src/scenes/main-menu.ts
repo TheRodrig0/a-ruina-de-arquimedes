@@ -16,7 +16,13 @@ export class MainMenu extends AbstractScene {
 
     private createBackground(): void {
         const cameraDimensions: Dimensions = this.cameraDimensions
-        this.add.image(cameraDimensions.width / 2, cameraDimensions.height / 2, "background")
+        const backgroundImageKey: string = "background"
+        const backgroundImagePosition: Position = {
+            x: cameraDimensions.width / 2,
+            y: cameraDimensions.height / 2
+        }
+
+        this.add.image(backgroundImagePosition.x, backgroundImagePosition.y, backgroundImageKey)
             .setDisplaySize(cameraDimensions.width, cameraDimensions.height)
             .setAlpha(0, 0, 0, 0.3)
     }
@@ -40,20 +46,16 @@ export class MainMenu extends AbstractScene {
     private createPrincipalButtons(): void {
         const buttonsProps = [{
             text: "Start",
-            key: "button",
-            callback: () => this.scene.start('InProgressScene')
+            callback: () => this.scene.start("InProgressScene")
         },
         {
-            text: "Options",
-            key: "button"
+            text: "Options"
         },
         {
-            text: "Credits",
-            key: "button"
+            text: "Credits"
         },
         {
-            text: "Exit",
-            key: "button"
+            text: "Exit"
         }]
 
         const buttonSpacing: number = 18
@@ -66,8 +68,7 @@ export class MainMenu extends AbstractScene {
                 x: startX,
                 y: startY + (index * buttonSpacing),
                 text: button.text,
-                key: button.key,
-                callback: button.callback
+                onClick: button.callback as () => any
             })
         })
     }
