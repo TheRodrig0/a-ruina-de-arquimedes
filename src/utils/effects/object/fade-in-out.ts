@@ -8,12 +8,12 @@ export function fadeInOut(config: CameraFadeConfig): void {
     fadeIn({
         scene,
         target,
-        duration,
+        duration: duration / 2,
         onComplete: (): void => {
             fadeOut({
                 scene,
                 target,
-                duration,
+                duration: duration / 2,
                 onComplete,
             })
         },
