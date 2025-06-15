@@ -2,6 +2,11 @@
 - [Português](#portugues)
 - [English](#english)
 
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Phaser](https://img.shields.io/badge/Phaser-3.60.0-2D2D2D?style=for-the-badge&logo=phaser&logoColor=white)](https://phaser.io/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+
 ---
 
 <a id="portugues"></a>
@@ -12,7 +17,7 @@
 </p>
 
 ### Sobre
-Embarque na misteriosa jornada de **‘A Ruína de Arquimedes’**, um RPG deslumbrante, criado com a poderosa tecnologia **Phaser 3**. Neste mundo imersivo e interativo, a matemática não é apenas uma ciência, mas uma magia poderosa que permeia o tecido da realidade. Arquimedes, nosso corajoso protagonista, é o mestre dessa magia. 
+Embarque na misteriosa jornada de **'A Ruína de Arquimedes'**, um RPG deslumbrante, criado com a poderosa tecnologia **Phaser 3**. Neste mundo imersivo e interativo, a matemática não é apenas uma ciência, mas uma magia poderosa que permeia o tecido da realidade. Arquimedes, nosso corajoso protagonista, é o mestre dessa magia. 
 
 Com cada enigma matemático resolvido, ele desvenda os segredos ocultos deste mundo de fantasia. Junte-se a Arquimedes nesta aventura épica e explore as profundezas de um universo onde a matemática é a chave para o poder e a sabedoria. Seja bem-vindo à sua jornada, onde cada passo revela um novo mistério aguardando para ser descoberto.
 
@@ -62,6 +67,15 @@ Com cada enigma matemático resolvido, ele desvenda os segredos ocultos deste mu
    ```bash
    npm test
    ```
+
+### Contribuição
+
+7. Faça um Fork do projeto
+8. Crie uma Branch para sua Feature (`git checkout -b feature/AmazingFeature`)
+9. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+10. Push para a Branch (`git push origin feature/AmazingFeature`)
+11. Abra um Pull Request
+
 ---
 
 <a id="english"></a>
@@ -121,3 +135,11 @@ With each mathematical puzzle solved, he unveils the most occult secrets of this
    ```bash
    npm test
    ```
+   
+### Contributing
+
+1. Fork the project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
