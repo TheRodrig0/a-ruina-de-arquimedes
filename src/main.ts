@@ -1,13 +1,17 @@
 import { setupGlobalErrorHandler } from './utils/error/setup-global-error-handler'
+
 import Phaser from "phaser"
-import { Boot } from './scenes/boot'
-import { Preloader } from './scenes/preloader'
-import { PreloaderUI } from './scenes/ui/preloader-ui'
-import { Intro } from './scenes/intro'
-import { MainMenu } from './scenes/main-menu'
-import { Game as MainGame } from './scenes/game'
-import { GameOver } from './scenes/game-over'
-import { InProgressScene } from './scenes/in-progress-scene'
+import { FontPlugin } from 'phaser-font-plugin'
+
+import { Boot } from './scenes/boot/boot'
+import { BootUI } from './scenes/boot/boot-ui'
+import { Preloader } from './scenes/preloader/preloader'
+import { PreloaderUI } from './scenes/preloader/preloader-ui'
+import { Intro } from './scenes/menu/intro'
+import { MainMenu } from './scenes/menu/main-menu'
+import { Game as MainGame } from './scenes/game/game'
+import { GameOver } from './scenes/game/game-over'
+import { InProgressScene } from './scenes/utility/in-progress-scene'
 
 setupGlobalErrorHandler()
 
@@ -38,8 +42,18 @@ const config: Phaser.Types.Core.GameConfig = {
             tileBias: 16
         },
     },
+    plugins: {
+        global: [
+            {
+                key: 'FontPlugin',
+                plugin: FontPlugin,
+                start: true,
+            }
+        ]
+    },
     scene: [
         Boot,
+        BootUI,
         Preloader,
         PreloaderUI,
         Intro,
